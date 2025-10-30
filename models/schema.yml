@@ -8,11 +8,18 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: Satislarla ilgili tablo
+        loaded_at_field: "CAST(date_date as TIMESTAMP)"
+        freshness: 
+          warn_after:
+            count: 90
+            period: day
         columns:
           - name: pdt_id
             description: urun id
           - name: orders_id
             description: siparis id'si
+          - name: date_date
+            description: satis tarih
         tests:
           - unique:
               column_name: "(orders_id || '-' || pdt_id)"
